@@ -43,7 +43,6 @@
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
         <img src="홍고추.jpg" alt=" class="w-full h-56 object-cover rounded-md">사진: 홍고추   0원/100g, 무료배송(CJ 오네) 
-        <img src="지도.png" alt=" class="w-full h-56 object-cover rounded-md> 사진: 서양양IC에서 오시는길
       </div>
     </div>
   </section>
@@ -101,7 +100,8 @@
     <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col md:flex-row justify-between">
       <div>
         <p class="font-semibold">서면나눔5일장</p>
-        <p class="text-xs">주소: 강원특별자치도 양양군 서면 구룡령로 1906-89 1층 장터(서림리) </p>
+        <p class="text-xs">주소: 강원특별자치도 양양군 서면 구룡령로 1906-89 1층 장터(서림리)</p>
+        <p class="text-xs">오시는길: <img src="지도.png" alt=" class="w-full h-56 object-cover rounded-md> 사진: 서양양IC에서 오시는길</p>
       </div>
       <div class="text-xs text-gray-400">
         <p>© 2025 서면나눔5일장. All rights reserved.</p>
