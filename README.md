@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
-        <img src="홍고추.jpg" alt="사진: 홍고추 대표사진" class="w-full h-56 object-cover rounded-md">사진: 홍고추   0원/100g, 무료배송(CJ 오네) 
+        <img src="홍고추.jpg" alt=" class="w-full h-56 object-cover rounded-md">사진: 홍고추   0원/100g, 무료배송(CJ 오네) 
         <p class="text-xs text-gray-500 mt-2">사진: 나눔장터 전경 (실제 이미지로 교체 가능)</p>
       </div>
     </div>
