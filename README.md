@@ -101,7 +101,7 @@
     <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col md:flex-row justify-between">
       <div>
         <p class="font-semibold">서면나눔5일장</p>
-        <p class="text-xs">주소: 양양군 서면 구룡령로 1906-89</p>
+        <p class="text-xs">주소: 강원특별자치도 양양군 서면 구룡령로 1906-89 1층 장터(서림리) </p>
       </div>
       <div class="text-xs text-gray-400">
         <p>© 2025 서면나눔5일장. All rights reserved.</p>
