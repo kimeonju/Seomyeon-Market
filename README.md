@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
-        <img src="홍고추.jpg" alt="서면나눔5일장 단독 판매" class="w-full h-56 object-cover rounded-md">
+        <img src="홍고추.jpg" alt="고추   0원/100g, 무료배송(CJ ONE) " class="w-full h-56 object-cover rounded-md">
         <p class="text-xs text-gray-500 mt-2">사진: 단독 판매 전경 (실제 이미지로 교체 가능)</p>
       </div>
     </div>
