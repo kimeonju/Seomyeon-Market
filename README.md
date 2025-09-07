@@ -2,11 +2,6 @@
 서면나눔5일장
 <!doctype html>
 <html lang="ko">
-<head>
-  <style>
-    .hero-bg{background:linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
-  </style>
-</head>
 <body class="font-sans text-gray-800 bg-gray-50">
 
   <!-- Header -->
