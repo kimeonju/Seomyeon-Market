@@ -43,7 +43,7 @@
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
         <img src="홍고추.jpg" alt=" class="w-full h-56 object-cover rounded-md">사진: 홍고추   0원/100g, 무료배송(CJ 오네) 
-        <p class="text-xs text-gray-500 mt-2">사진: 장터 위치 (실제 이미지로 교체 가능)</p>
+        <img src="지도.png" alt=" class="w-full h-56 object-cover rounded-md> 사진: 서양양IC에서 오시는길
       </div>
     </div>
   </section>
