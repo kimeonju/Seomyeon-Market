@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>서면나눔5일장</title>
-  <meta name="description" content="양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다." />
+  <meta name="description" content="강원특별자치도 양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다." />
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <style>
     .hero-bg{background:linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
@@ -16,7 +16,7 @@
         <div class="w-12 h-12 bg-red-500 rounded-md flex items-center justify-center text-white font-bold">5일</div>
         <div>
           <h1 class="text-lg font-semibold">서면나눔5일장</h1>
-          <p class="text-xs text-gray-500">양양군 서면 구룡령로 1906-89</p>
+          <p class="text-xs text-gray-500">강원특별자치도 양양군 서면 구룡령로 1906-89</p>
         </div>
       </div>
       <nav class="space-x-4 text-sm">
