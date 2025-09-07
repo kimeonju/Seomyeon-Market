@@ -63,7 +63,6 @@
           <thead>
             <tr class="text-gray-600">
               <th class="p-2">날짜</th>
-              <th class="p-2">요일</th>
               <th class="p-2">판매 품목</th>
             </tr>
           </thead>
