@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
-        <img src="홍고추.jpg" alt=" class="w-full h-56 object-cover rounded-md">사진: 홍고추   0원/100g, 무료배송(CJ 오네) 
+        <img src="홍고추.jpg" alt=" class="w-full h-56 object-cover rounded-md">사진: 홍고추 0원/100g, 무료배송(CJ 오네) 
       </div>
     </div>
   </section>
