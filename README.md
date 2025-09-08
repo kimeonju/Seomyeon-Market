@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>서면나눔5일장</title>
