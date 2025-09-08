@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>서면나눔5일장</title>
-  <meta name="description" content="강원특별자치도 양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다." />
+  <meta name="description" content="양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다." />
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <style>
     .hero-bg{background:linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
@@ -17,7 +16,7 @@
         <div class="w-12 h-12 bg-red-500 rounded-md flex items-center justify-center text-white font-bold">5일</div>
         <div>
           <h1 class="text-lg font-semibold">서면나눔5일장</h1>
-          <p class="text-xs text-gray-500">강원특별자치도 양양군 서면 구룡령로 1906-89</p>
+          <p class="text-xs text-gray-500">양양군 서면 구룡령로 1906-89</p>
         </div>
       </div>
       <nav class="space-x-4 text-sm">
@@ -33,7 +32,7 @@
   <section class="hero-bg py-12">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
       <div>
-        <h2 class="text-3xl font-extrabold mb-2">맛있는 채소를 저희 장터에서 사세요!🌶</h2>
+        <h2 class="text-3xl font-extrabold mb-2">맛있는 고추를 저희 장터에서 사세요!🌶</h2>
         <div class="flex space-x-3">
           <a href="#schedule" class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">장터 일정 보기</a>
           <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank"
@@ -43,8 +42,9 @@
         </div>
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
-        <img src="홍고추.jpg">   홍고추 0원/100g, 무료배송(CJ 오네) 
-      </div＞
+        <img src="/assets/solo-market-placeholder.jpg" alt="서면나눔5일장 단독 판매" class="w-full h-56 object-cover rounded-md">
+        <p class="text-xs text-gray-500 mt-2">사진: 단독 판매 전경 (실제 이미지로 교체 가능)</p>
+      </div>
     </div>
   </section>
 
@@ -101,7 +101,7 @@
     <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col md:flex-row justify-between">
       <div>
         <p class="font-semibold">서면나눔5일장</p>
-        <p class="text-xs">주소: 강원특별자치도 양양군 서면 구룡령로 1906-89 1층 장터(서림리)</p>
+        <p class="text-xs">주소: 양양군 서면 구룡령로 1906-89</p>
       </div>
       <div class="text-xs text-gray-400">
         <p>© 2025 서면나눔5일장. All rights reserved.</p>
