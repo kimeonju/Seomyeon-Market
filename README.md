@@ -33,7 +33,7 @@
   <section class="hero-bg py-12">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
       <div>
-        <h2 class="text-3xl font-extrabold mb-2">맛있는 고추를 저희 장터에서 사세요!🌶</h2>
+        <h2 class="text-3xl font-extrabold mb-2">맛있는 채소를 저희 장터에서 사세요!🌶</h2>
         <div class="flex space-x-3">
           <a href="#schedule" class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">장터 일정 보기</a>
           <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank"
