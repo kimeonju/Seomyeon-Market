@@ -102,8 +102,6 @@
       <div>
         <p class="font-semibold">서면나눔5일장</p>
         <p class="text-xs">주소: 강원특별자치도 양양군 서면 구룡령로 1906-89 1층 장터(서림리)</p>
-        <img src="지도.png" alt=" class="w-full h-56 object-cover rounded-md>
-        <p class="textimg-xs">서양양IC에서 오시는길</p>
       </div>
       <div class="text-xs text-gray-400">
         <p>© 2025 서면나눔5일장. All rights reserved.</p>
