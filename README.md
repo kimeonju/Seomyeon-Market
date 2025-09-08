@@ -44,10 +44,7 @@
       </div>
       <div class="bg-white rounded-lg shadow-inner p-4">
         <img src="홍고추.jpg">   홍고추 0원/100g, 무료배송(CJ 오네) 
-      </div>
-      <div class="bg-white rounded-lg shadow-inner p-4">
-        <img src="홍고추.jpg">   홍고추 0원/100g, 무료배송(CJ 오네) 
-      </div>
+      </div＞
     </div>
   </section>
 
