@@ -48,7 +48,7 @@
         <a href="tel:01026946608" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 inline-block">구매 문의</a>
       </div>
 
-      <!-- 상품 2: 청고추 → 풋고추 -->
+      <!-- 상품 2 -->
       <div class="bg-white rounded-lg shadow p-4 text-center">
         <img src="풋고추.jpg" alt="풋고추" class="mx-auto w-48 h-auto mb-2 rounded">
         <h3 class="font-semibold text-lg">풋고추</h3>
