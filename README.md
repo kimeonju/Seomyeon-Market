@@ -55,7 +55,7 @@
   </div>
 </section>
 
-<!-- Schedule Section -->
+<!-- Schedule Section (항상 보임) -->
 <section id="schedule" class="bg-white py-8">
   <div class="max-w-6xl mx-auto px-4">
     <h3 class="text-2xl font-bold mb-4">장터 일정</h3>
@@ -102,9 +102,7 @@
             <th class="p-2">비고</th>
           </tr>
         </thead>
-        <tbody id="donation-body">
-          <!-- JS로 데이터 삽입 -->
-        </tbody>
+        <tbody id="donation-body"></tbody>
       </table>
     </div>
     <p class="mt-4 text-sm text-gray-500">※ 개인 비용으로 구매한 농산물은 투자 비율만큼 가져간 후 일부 기부, 일부 소유합니다.</p>
@@ -115,14 +113,12 @@
 <section id="posts" class="bg-white py-10">
   <div class="max-w-6xl mx-auto px-4">
     <h3 class="text-2xl font-bold mb-4">게시글</h3>
-    <!-- 게시글 작성 폼 (관리자만 표시) -->
     <div id="write-section" class="mb-6 hidden">
       <input id="post-title" type="text" placeholder="제목" class="border p-2 w-full mb-2 rounded">
       <textarea id="post-content" placeholder="내용" class="border p-2 w-full mb-2 rounded"></textarea>
       <button id="post-submit" class="px-4 py-2 bg-green-600 text-white rounded">게시</button>
     </div>
     <div id="post-list" class="flex overflow-x-auto space-x-4">
-      <!-- 게시글 항목 -->
       <div class="border-b py-2 px-4 w-96 flex-shrink-0 search-item">
         <h4 class="font-semibold">2025년 9월 20일 장터 준비 안내</h4>
         <p>이번 주 장터는 홍고추와 풋고추를 중심으로 진행됩니다.</p>
@@ -147,6 +143,7 @@
         <p class="text-red-500 font-bold">0원</p>
       </div>
     </div>
+    <p class="mt-4 text-sm text-gray-500">※ 고추 1kg 기준: 100g당 300원, 건고추 가격은 별도 문의.</p>
   </div>
 </section>
 
@@ -156,6 +153,7 @@
     <div>
       <p class="font-semibold">서면나눔5일장</p>
       <p class="text-xs">주소: 양양군 서면 구룡령로 1906-89</p>
+      <p class="text-xs mt-2">※ 고추 1kg 기준: 100g당 300원, 건고추 가격은 별도 문의.</p>
     </div>
     <div class="text-xs text-gray-400">
       <p>© 2025 서면나눔5일장. All rights reserved.</p>
@@ -198,13 +196,11 @@ async function loadDonations() {
       `;
       tbody.appendChild(tr);
     });
-  } catch(err) {
-    console.error("기부금 데이터 로드 실패:", err);
-  }
+  } catch(err) { console.error("기부금 데이터 로드 실패:", err); }
 }
 loadDonations();
 
-// 검색 기능
+// 검색 기능 (장터 일정은 항상 보임)
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', function() {
   const query = this.value.toLowerCase();
