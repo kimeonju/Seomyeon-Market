@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html><html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>서면나눔5일장</title>
