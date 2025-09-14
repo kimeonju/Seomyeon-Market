@@ -141,7 +141,7 @@
     async function loadDonations() {
 const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
 const sheetName = "Sheet1";
-const url = `https://opensheet.elk.sh/${1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8}/${sheet1}`;
+const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
 
 
       try {
