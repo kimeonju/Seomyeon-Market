@@ -139,9 +139,10 @@
   <!-- JS: 구글 시트 API 불러오기 -->
   <script>
     async function loadDonations() {
-      const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
-      const sheetName = "Sheet1";
-      const url = `https://opensheet.elk.sh/${1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8}/${Sheet1}`;
+const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
+const sheetName = "Sheet1";
+const url = `https://opensheet.elk.sh/${1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8}/${sheet1}`;
+
 
       try {
         const res = await fetch(url);
