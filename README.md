@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>서면나눔5일장</title>
@@ -21,17 +22,26 @@
         <p class="text-xs text-gray-500">양양군 서면 구룡령로 1906-89</p>
       </div>
     </div>
-
-    <!-- 검색창 -->
-    <div class="flex items-center">
-      <input id="search-input" type="text" placeholder="검색..." 
-             class="px-3 py-1 border rounded shadow-sm w-64 text-sm">
-    </div>
   </div>
+
+  <!-- 검색창 -->
+  <div class="max-w-6xl mx-auto px-4 py-2">
+    <input id="search-input" type="text" placeholder="검색..." 
+           class="px-3 py-2 border rounded shadow-sm w-full text-sm">
+  </div>
+
+  <!-- 메뉴 -->
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex space-x-4 text-sm">
+      <a href="#schedule" class="hover:underline">장터 일정</a>
+      <a href="#donation" class="hover:underline">기부금 사용내역</a>
+      <a href="#contact" class="hover:underline">문의</a>
+    </div>
+  </nav>
 </header>
 
 <!-- Hero Section -->
-<section class="hero-bg py-12">
+<section class="hero-bg py-12 search-item">
   <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
     <div>
       <h2 class="text-3xl font-extrabold mb-2">맛있는 고추를 저희 장터에서 사세요!🌶</h2>
@@ -43,7 +53,7 @@
            class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
       </div>
     </div>
-    <div class="bg-white rounded-lg shadow-inner p-4 text-center search-item">
+    <div class="bg-white rounded-lg shadow-inner p-4 text-center">
       <img src="홍고추.jpg" alt="홍고추 상품 이미지" class="mx-auto w-48 h-auto mb-2 rounded">
       <p class="font-semibold">홍고추</p>
       <p class="text-red-500 font-bold">0원</p>
@@ -78,7 +88,7 @@
   </div>
 </section>
 
-<!-- Schedule Section (always last in search results) -->
+<!-- Schedule Section -->
 <section id="schedule" class="bg-white py-8 search-item">
   <div class="max-w-6xl mx-auto px-4 overflow-x-auto">
     <h3 class="text-2xl font-bold mb-4">장터 일정</h3>
@@ -101,7 +111,7 @@
 </section>
 
 <!-- Donation Section -->
-<section id="donation" class="bg-white py-10">
+<section id="donation" class="bg-white py-10 search-item">
   <div class="max-w-6xl mx-auto px-4">
     <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
     <p class="text-gray-600 mb-4">서면나눔5일장은 기부금을 투명하게 운영하며, 매달 사용 내역을 공개합니다.</p>
@@ -115,7 +125,7 @@
             <th class="p-2">비고</th>
           </tr>
         </thead>
-        <tbody id="donation-body" class="search-item"></tbody>
+        <tbody id="donation-body"></tbody>
       </table>
     </div>
     <p class="mt-4 text-sm text-gray-500">※ 개인 비용으로 구매한 농산물은 투자 비율만큼 가져간 후 일부 기부, 일부 소유합니다.</p>
@@ -154,23 +164,19 @@
 <!-- JS: 통합 검색 + 기부금 API -->
 <script>
 const searchInput = document.getElementById('search-input');
-
 searchInput.addEventListener('input', function() {
   const term = this.value.toLowerCase();
   const schedule = document.getElementById('schedule');
-  
-  // 먼저 모든 search-item 숨김
+
   document.querySelectorAll('.search-item').forEach(item => item.style.display = 'none');
-  
-  // 상품, 게시글, 기타 검색
+
   document.querySelectorAll('.search-item').forEach(item => {
     if(item.id !== 'schedule') {
       const text = item.innerText.toLowerCase();
       if(text.includes(term)) item.style.display = 'block';
     }
   });
-  
-  // 장터 일정은 항상 맨 아래
+
   schedule.style.display = 'block';
 });
 
@@ -196,7 +202,6 @@ async function loadDonations() {
     });
   } catch(err) { console.error("기부금 데이터 로드 실패:", err); }
 }
-
 loadDonations();
 </script>
 </body>
