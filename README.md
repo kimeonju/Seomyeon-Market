@@ -94,7 +94,10 @@
             <h4 class="font-semibold">기부금 사용 보고</h4>
             <p>이번 달 기부금은 농자재 구입에 사용되었습니다.</p>
           </div>
-          <!-- 다른 게시글 추가 가능 -->
+          <div class="border-b py-2 px-4 w-96 flex-shrink-0 search-item">
+            <h4 class="font-semibold">2025년 9월 20일 장터 준비 안내</h4>
+            <p>이번 주 장터는 홍고추와 풋고추를 중심으로 진행됩니다.</p>
+          </div>
         </div>
       </div>
     </div>
