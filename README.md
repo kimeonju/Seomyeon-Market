@@ -82,7 +82,3 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="max-w-6xl mx-auto px-4 py-10 text-center">
-    <h3 class="text-2xl font-bold mb-3">문의하기</h3>
-    <p class="mb-4 text-gray-600">문의나 요청 사항이 있으시면 아래 버튼을 눌러 설문조사 폼을 작성하거나 전화로 문의해주세요.</p>
-    <div class="flex flex-col md:flex-row justify-center gap-4">
