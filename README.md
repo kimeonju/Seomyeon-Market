@@ -25,8 +25,8 @@
       <nav class="space-x-4 text-sm">
         <a href="#schedule" class="hover:underline">장터 일정</a>
         <a href="#products" class="hover:underline">상품</a>
-        <a href="#donation" class="hover:underline">기부금 사용내역</a>
         <a href="#contact" class="hover:underline">문의</a>
+        <a href="#donation" class="hover:underline">기부금 사용내역</a>
       </nav>
     </div>
   </header>
