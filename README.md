@@ -169,7 +169,7 @@
 // 기부금 불러오기
 async function loadDonations() {
   const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
-  const sheetName = "Sheet1";
+  const sheetName = "기부금사용내역";
   const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
   try {
     const res = await fetch(url);
