@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>서면나눔5일장</title>
-<meta name="description" content="양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다.">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-<style>
-  .hero-bg {background: linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
-  .search-item {min-width: 300px;}
-  .media {max-width:100%; max-height:200px; margin-top:0.5rem; border-radius:0.25rem;}
-</style>
+  <meta charset="UTF-8">
+  <title>서면나눔5일장</title>
+  <meta name="description" content="양양군 서면의 장터, 서면나눔5일장 농산물 직거래 페이지입니다.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .hero-bg {background: linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
+    .search-item {min-width: 300px;}
+    video {max-width: 100%; border-radius: 8px;}
+    img {max-width: 100%; border-radius: 8px;}
+  </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
 
@@ -71,9 +72,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border-t"><td class="p-2">매달 4일, 9일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
-          <tr class="border-t bg-white"><td class="p-2">매달 14일, 19일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
-          <tr class="border-t bg-white"><td class="p-2">매달 24일, 29일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
+          <tr class="border-t">
+            <td class="p-2">매달 4일, 9일</td>
+            <td class="p-2">생고추, 건고추, 풋고추</td>
+          </tr>
+          <tr class="border-t bg-white">
+            <td class="p-2">매달 14일, 19일</td>
+            <td class="p-2">생고추, 건고추, 풋고추</td>
+          </tr>
+          <tr class="border-t bg-white">
+            <td class="p-2">매달 24일, 29일</td>
+            <td class="p-2">생고추, 건고추, 풋고추</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -106,15 +116,16 @@
 <section id="posts" class="bg-white py-10">
   <div class="max-w-6xl mx-auto px-4">
     <h3 class="text-2xl font-bold mb-4">게시글</h3>
-    <!-- 작성폼 -->
     <div id="write-section" class="mb-6 hidden">
       <input id="post-title" type="text" placeholder="제목" class="border p-2 w-full mb-2 rounded">
       <textarea id="post-content" placeholder="내용" class="border p-2 w-full mb-2 rounded"></textarea>
-      <input id="post-image" type="file" accept="image/*" class="border p-2 w-full mb-2 rounded">
-      <input id="post-video" type="file" accept="video/*" class="border p-2 w-full mb-2 rounded">
+      <input id="post-image" type="file" accept="image/*" class="mb-2">
+      <input id="post-video" type="file" accept="video/*" class="mb-2">
       <button id="post-submit" class="px-4 py-2 bg-green-600 text-white rounded">게시</button>
     </div>
-    <!-- 게시글 리스트 -->
+    <div id="post-list" class="flex overflow-x-auto space-x-4">
+      <!-- 초기 게시글 없음 -->
+    </div>
   </div>
 </section>
 
@@ -134,6 +145,7 @@
         <p class="text-red-500 font-bold">0원</p>
       </div>
     </div>
+    <p class="mt-4 text-sm text-gray-500">※ 고추 1kg 기준: 100g당 300원, 건고추 가격은 별도 문의.</p>
   </div>
 </section>
 
@@ -165,34 +177,47 @@
 </div>
 
 <script>
-// 기부금 샘플 데이터 (구글시트 불러오기 대체)
-const donationData = [
-  {날짜:"2025-09-01", 항목:"종자 구매", 금액:"50,000원", 비고:"유기농 종자"},
-  {날짜:"2025-09-05", 항목:"토양 개량", 금액:"30,000원", 비고:"퇴비 및 비료"}
-];
-const tbody = document.getElementById("donation-body");
-donationData.forEach(row=>{
-  const tr=document.createElement("tr");
-  tr.innerHTML=`<td class="p-2 border-t">${row.날짜}</td><td class="p-2 border-t">${row.항목}</td><td class="p-2 border-t">${row.금액}</td><td class="p-2 border-t">${row.비고}</td>`;
-  tbody.appendChild(tr);
-});
+// 기부금 불러오기 (예시)
+async function loadDonations() {
+  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
+  const sheetName = "Sheet1";
+  const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const tbody = document.getElementById("donation-body");
+    tbody.innerHTML = "";
+    data.forEach(row => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="p-2 border-t">${row.날짜 || ""}</td>
+        <td class="p-2 border-t">${row.항목 || ""}</td>
+        <td class="p-2 border-t">${row.금액 || ""}</td>
+        <td class="p-2 border-t">${row.비고 || ""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch(err) { console.error(err); }
+}
+loadDonations();
 
-// 검색 기능 (장터 일정 제외)
-document.getElementById('search-input').addEventListener('input',function(){
-  const q=this.value.toLowerCase();
-  document.querySelectorAll('.search-item').forEach(item=>{
-    const txt=item.innerText.toLowerCase();
-    item.style.display = txt.includes(q)?'block':'none';
+// 검색 기능
+document.getElementById('search-input').addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  document.querySelectorAll('.search-item').forEach(item => {
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(query) ? 'block' : 'none';
   });
 });
 
 // 관리자 로그인
-const writeSection=document.getElementById('write-section');
-document.getElementById('login-btn').addEventListener('click',()=>document.getElementById('login-modal').classList.remove('hidden'));
-document.getElementById('login-cancel').addEventListener('click',()=>document.getElementById('login-modal').classList.add('hidden'));
-document.getElementById('login-confirm').addEventListener('click',()=>{
-  const id=document.getElementById('admin-id').value;
-  const pw=document.getElementById('admin-pw').value;
+const loginBtn = document.getElementById('login-btn');
+const writeSection = document.getElementById('write-section');
+loginBtn.addEventListener('click', () => document.getElementById('login-modal').classList.remove('hidden'));
+document.getElementById('login-cancel').addEventListener('click', () => document.getElementById('login-modal').classList.add('hidden'));
+document.getElementById('login-confirm').addEventListener('click', () => {
+  const id = document.getElementById('admin-id').value;
+  const pw = document.getElementById('admin-pw').value;
   if(id==='eonju23' && pw==='200301'){
     alert("관리자 로그인 성공");
     writeSection.classList.remove('hidden');
@@ -200,60 +225,38 @@ document.getElementById('login-confirm').addEventListener('click',()=>{
   } else alert("로그인 실패");
 });
 
-// 게시글 작성/수정/삭제
-document.getElementById('post-submit').addEventListener('click',()=>{
-  const title=document.getElementById('post-title').value.trim();
-  const content=document.getElementById('post-content').value.trim();
-  const imgFile=document.getElementById('post-image').files[0];
-  const videoFile=document.getElementById('post-video').files[0];
-  if(!title||!content){alert("제목과 내용을 입력하세요");return;}
-  
-  const div=document.createElement('div');
-  div.className='border p-4 w-96 flex-shrink-0 search-item bg-gray-50 rounded relative';
-  div.innerHTML=`<h4 class="font-semibold">${title}</h4><p>${content}</p>`;
-
-  if(imgFile){
-    const imgURL=URL.createObjectURL(imgFile);
-    const imgEl=document.createElement('img');
-    imgEl.src=imgURL;
-    imgEl.className='media';
-    div.appendChild(imgEl);
-  }
-  if(videoFile){
-    const videoURL=URL.createObjectURL(videoFile);
-    const vidEl=document.createElement('video');
-    vidEl.src=videoURL;
-    vidEl.controls=true;
-    vidEl.className='media';
-    div.appendChild(vidEl);
-  }
-
-  // 수정 버튼
-  const editBtn=document.createElement('button');
-  editBtn.innerText='수정';
-  editBtn.className='absolute top-2 right-16 px-2 py-1 bg-yellow-400 text-white rounded text-xs';
-  editBtn.onclick=()=>{ 
-    const newTitle=prompt("새 제목", title);
-    const newContent=prompt("새 내용", content);
-    if(newTitle)newTitle.trim()!==''?div.querySelector('h4').innerText=newTitle:null;
-    if(newContent)newContent.trim()!==''?div.querySelector('p').innerText=newContent:null;
-  };
-  div.appendChild(editBtn);
-
-  // 삭제 버튼
-  const delBtn=document.createElement('button');
-  delBtn.innerText='삭제';
-  delBtn.className='absolute top-2 right-2 px-2 py-1 bg-red-500 text-white rounded text-xs';
-  delBtn.onclick=()=>div.remove();
-  div.appendChild(delBtn);
-
-  document.getElementById('post-list').appendChild(div);
-  document.getElementById('post-title').value='';
-  document.getElementById('post-content').value='';
-  document.getElementById('post-image').value='';
-  document.getElementById('post-video').value='';
+// 게시글 작성 (사진/동영상 포함)
+document.getElementById('post-submit').addEventListener('click', () => {
+  const title = document.getElementById('post-title').value.trim();
+  const content = document.getElementById('post-content').value.trim();
+  const imgFile = document.getElementById('post-image').files[0];
+  const videoFile = document.getElementById('post-video').files[0];
+  if(title && content){
+    const div = document.createElement('div');
+    div.className = 'border-b py-2 px-4 w-96 flex-shrink-0 search-item';
+    div.innerHTML = `<h4 class="font-semibold">${title}</h4><p>${content}</p>`;
+    if(imgFile){
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(imgFile);
+      div.appendChild(img);
+    }
+    if(videoFile){
+      const video = document.createElement('video');
+      video.src = URL.createObjectURL(videoFile);
+      video.controls = true;
+      div.appendChild(video);
+    }
+    document.getElementById('post-list').appendChild(div);
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-content').value = '';
+    document.getElementById('post-image').value = '';
+    document.getElementById('post-video').value = '';
+  } else alert("제목과 내용을 입력하세요");
 });
 </script>
 
 </body>
 </html>
+
+
+ChatGPT는
