@@ -115,12 +115,6 @@
       <button id="post-submit" class="px-4 py-2 bg-green-600 text-white rounded">게시</button>
     </div>
     <!-- 게시글 리스트 -->
-    <div id="post-list" class="flex overflow-x-auto space-x-4">
-      <div class="border-b py-2 px-4 w-96 flex-shrink-0 search-item">
-        <h4 class="font-semibold">2025년 9월 20일 장터 준비 안내</h4>
-        <p>이번 주 장터는 홍고추와 풋고추를 중심으로 진행됩니다.</p>
-      </div>
-    </div>
   </div>
 </section>
 
