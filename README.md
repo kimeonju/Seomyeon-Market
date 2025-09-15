@@ -180,7 +180,7 @@
 <script>
 // 구글 시트 기부금 불러오기
 async function loadDonations() {
-  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8"; // 실제 공유된 시트 ID
+  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
   const sheetName = encodeURIComponent("Sheet1");
   const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
   try {
