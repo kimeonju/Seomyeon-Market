@@ -177,7 +177,7 @@ async function loadDonations() {
     const tbody = document.getElementById("donation-body");
     tbody.innerHTML = "";
     data.forEach((row, idx) => {
-      if(idx===0) return; // 헤더 제외
+      if(idx===0) return;
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td class="p-2 border-t">${row.날짜 || ""}</td>
