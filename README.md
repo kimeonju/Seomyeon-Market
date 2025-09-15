@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -9,8 +8,8 @@
   <style>
     .hero-bg {background: linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
     .search-item {min-width: 300px;}
-    video {max-width: 100%; border-radius: 8px;}
-    img {max-width: 100%; border-radius: 8px;}
+    video, img {max-width: 100%; border-radius: 8px;}
+    .post-actions button {margin-right: 4px;}
   </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
@@ -72,18 +71,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border-t">
-            <td class="p-2">매달 4일, 9일</td>
-            <td class="p-2">생고추, 건고추, 풋고추</td>
-          </tr>
-          <tr class="border-t bg-white">
-            <td class="p-2">매달 14일, 19일</td>
-            <td class="p-2">생고추, 건고추, 풋고추</td>
-          </tr>
-          <tr class="border-t bg-white">
-            <td class="p-2">매달 24일, 29일</td>
-            <td class="p-2">생고추, 건고추, 풋고추</td>
-          </tr>
+          <tr class="border-t"><td class="p-2">매달 4일, 9일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
+          <tr class="border-t bg-white"><td class="p-2">매달 14일, 19일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
+          <tr class="border-t bg-white"><td class="p-2">매달 24일, 29일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
         </tbody>
       </table>
     </div>
@@ -155,7 +145,6 @@
     <div>
       <p class="font-semibold">서면나눔5일장</p>
       <p class="text-xs">주소: 양양군 서면 구룡령로 1906-89</p>
-      <p class="text-xs mt-2">※ 고추 1kg 기준: 100g당 300원, 건고추 가격은 별도 문의.</p>
     </div>
     <div class="text-xs text-gray-400">
       <p>© 2025 서면나눔5일장. All rights reserved.</p>
@@ -177,7 +166,7 @@
 </div>
 
 <script>
-// 기부금 불러오기 (예시)
+// 기부금 불러오기
 async function loadDonations() {
   const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
   const sheetName = "Sheet1";
@@ -187,7 +176,8 @@ async function loadDonations() {
     const data = await res.json();
     const tbody = document.getElementById("donation-body");
     tbody.innerHTML = "";
-    data.forEach(row => {
+    data.forEach((row, idx) => {
+      if(idx===0) return; // 헤더 제외
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td class="p-2 border-t">${row.날짜 || ""}</td>
@@ -197,14 +187,14 @@ async function loadDonations() {
       `;
       tbody.appendChild(tr);
     });
-  } catch(err) { console.error(err); }
+  } catch(err) { console.error("기부금 로드 실패:", err); }
 }
 loadDonations();
 
-// 검색 기능
-document.getElementById('search-input').addEventListener('input', function() {
+// 검색
+document.getElementById('search-input').addEventListener('input', function(){
   const query = this.value.toLowerCase();
-  document.querySelectorAll('.search-item').forEach(item => {
+  document.querySelectorAll('.search-item').forEach(item=>{
     const text = item.innerText.toLowerCase();
     item.style.display = text.includes(query) ? 'block' : 'none';
   });
@@ -225,38 +215,58 @@ document.getElementById('login-confirm').addEventListener('click', () => {
   } else alert("로그인 실패");
 });
 
-// 게시글 작성 (사진/동영상 포함)
+// 게시글 작성
 document.getElementById('post-submit').addEventListener('click', () => {
   const title = document.getElementById('post-title').value.trim();
   const content = document.getElementById('post-content').value.trim();
-  const imgFile = document.getElementById('post-image').files[0];
+  const imageFile = document.getElementById('post-image').files[0];
   const videoFile = document.getElementById('post-video').files[0];
-  if(title && content){
-    const div = document.createElement('div');
-    div.className = 'border-b py-2 px-4 w-96 flex-shrink-0 search-item';
-    div.innerHTML = `<h4 class="font-semibold">${title}</h4><p>${content}</p>`;
-    if(imgFile){
-      const img = document.createElement('img');
-      img.src = URL.createObjectURL(imgFile);
-      div.appendChild(img);
+  if(!title || !content) { alert("제목과 내용을 입력하세요"); return; }
+
+  const div = document.createElement('div');
+  div.className = 'border-b py-2 px-4 w-96 flex-shrink-0 search-item';
+  div.innerHTML = `<h4 class="font-semibold">${title}</h4><p>${content}</p>`;
+
+  if(imageFile){
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(imageFile);
+    img.className = 'my-2';
+    div.appendChild(img);
+  }
+  if(videoFile){
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(videoFile);
+    video.controls = true;
+    video.className = 'my-2';
+    div.appendChild(video);
+  }
+
+  // 수정/삭제 버튼
+  const actionDiv = document.createElement('div');
+  actionDiv.className = 'post-actions mt-2';
+  const editBtn = document.createElement('button');
+  editBtn.textContent = '수정'; editBtn.className = 'px-2 py-1 bg-yellow-400 text-white rounded text-xs';
+  editBtn.onclick = ()=>{
+    const newTitle = prompt("새 제목:", title);
+    const newContent = prompt("새 내용:", content);
+    if(newTitle && newContent){
+      div.querySelector('h4').textContent = newTitle;
+      div.querySelector('p').textContent = newContent;
     }
-    if(videoFile){
-      const video = document.createElement('video');
-      video.src = URL.createObjectURL(videoFile);
-      video.controls = true;
-      div.appendChild(video);
-    }
-    document.getElementById('post-list').appendChild(div);
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-content').value = '';
-    document.getElementById('post-image').value = '';
-    document.getElementById('post-video').value = '';
-  } else alert("제목과 내용을 입력하세요");
+  };
+  const delBtn = document.createElement('button');
+  delBtn.textContent = '삭제'; delBtn.className = 'px-2 py-1 bg-red-500 text-white rounded text-xs';
+  delBtn.onclick = ()=> div.remove();
+  actionDiv.appendChild(editBtn); actionDiv.appendChild(delBtn);
+  div.appendChild(actionDiv);
+
+  document.getElementById('post-list').appendChild(div);
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-content').value = '';
+  document.getElementById('post-image').value = '';
+  document.getElementById('post-video').value = '';
 });
 </script>
 
 </body>
 </html>
-
-
-ChatGPT는
