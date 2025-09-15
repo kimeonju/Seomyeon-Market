@@ -181,12 +181,12 @@
 // 구글 시트 기부금 불러오기
 async function loadDonations() {
   const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
-  const sheetName = encodeURIComponent("Sheet1");
+  const sheetName = encodeURIComponent("기부금 사용내역");
   const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log("기부금 데이터:", data); // 콘솔에서 확인
+    console.log("기부금 데이터:", data);
     const tbody = document.getElementById("donation-body");
     tbody.innerHTML = "";
     if (data.length === 0) {
