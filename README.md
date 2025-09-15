@@ -102,7 +102,9 @@
             <th class="p-2">비고</th>
           </tr>
         </thead>
-        <tbody id="donation-body"></tbody>
+        <tbody id="donation-body">
+          <tr><td colspan="4" class="p-2 text-center text-gray-500">불러오는 중...</td></tr>
+        </tbody>
       </table>
     </div>
     <p class="mt-4 text-sm text-gray-500">※ 개인 비용으로 구매한 농산물은 투자 비율만큼 가져간 후 일부 기부, 일부 소유합니다.</p>
@@ -178,29 +180,38 @@
 <script>
 // 구글 시트 기부금 불러오기
 async function loadDonations() {
-  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
-  const sheetName = "Sheet1";
+  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8"; // 실제 공유된 시트 ID
+  const sheetName = encodeURIComponent("Sheet1");
   const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
   try {
     const res = await fetch(url);
     const data = await res.json();
+    console.log("기부금 데이터:", data); // 콘솔에서 확인
     const tbody = document.getElementById("donation-body");
     tbody.innerHTML = "";
-    data.forEach(row => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="p-2 border-t">${row.날짜 || ""}</td>
-        <td class="p-2 border-t">${row.항목 || ""}</td>
-        <td class="p-2 border-t">${row.금액 || ""}</td>
-        <td class="p-2 border-t">${row.비고 || ""}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch(err) { console.error("기부금 데이터 로드 실패:", err); }
+    if (data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4" class="p-2 text-center text-gray-500">데이터 없음</td></tr>`;
+    } else {
+      data.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="p-2 border-t">${row["날짜"] || ""}</td>
+          <td class="p-2 border-t">${row["항목"] || ""}</td>
+          <td class="p-2 border-t">${row["금액"] || ""}</td>
+          <td class="p-2 border-t">${row["비고"] || ""}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  } catch(err) {
+    console.error("기부금 데이터 로드 실패:", err);
+    const tbody = document.getElementById("donation-body");
+    tbody.innerHTML = `<tr><td colspan="4" class="p-2 text-center text-red-500">데이터를 불러올 수 없습니다</td></tr>`;
+  }
 }
 loadDonations();
 
-// 검색 기능 (장터 일정은 항상 보임)
+// 검색 기능 (게시글/상품만)
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', function() {
   const query = this.value.toLowerCase();
