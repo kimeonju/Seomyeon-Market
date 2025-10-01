@@ -29,6 +29,7 @@
         <a href="#posts" class="hover:underline">게시글</a>
         <a href="#products" class="hover:underline">상품</a>
         <button id="login-btn" class="px-2 py-1 bg-blue-600 text-white rounded">관리자 로그인</button>
+        <button id="logout-btn" class="px-2 py-1 bg-gray-500 text-white rounded hidden">로그아웃</button>
       </nav>
     </div>
   </div>
@@ -177,14 +178,16 @@ async function loadDonations() {
 }
 loadDonations();
 
-// 관리자 로그인
+// 로그인/로그아웃 관련
 const loginBtn = document.getElementById('login-btn');
+const logoutBtn = document.getElementById('logout-btn');
 const modal = document.getElementById('login-modal');
 const writeSection = document.getElementById('write-section');
 const productForm = document.getElementById('product-form');
 
 loginBtn.addEventListener('click', ()=> modal.classList.remove('hidden'));
 document.getElementById('login-cancel').addEventListener('click', ()=> modal.classList.add('hidden'));
+
 document.getElementById('login-confirm').addEventListener('click', ()=> {
   const id = document.getElementById('admin-id').value;
   const pw = document.getElementById('admin-pw').value;
@@ -193,7 +196,17 @@ document.getElementById('login-confirm').addEventListener('click', ()=> {
     writeSection.classList.remove('hidden');
     productForm.classList.remove('hidden');
     modal.classList.add('hidden');
+    loginBtn.classList.add('hidden');
+    logoutBtn.classList.remove('hidden');
   } else alert("로그인 실패");
+});
+
+logoutBtn.addEventListener('click', ()=>{
+  writeSection.classList.add('hidden');
+  productForm.classList.add('hidden');
+  logoutBtn.classList.add('hidden');
+  loginBtn.classList.remove('hidden');
+  alert("로그아웃 되었습니다.");
 });
 
 // 게시글 작성
@@ -227,7 +240,9 @@ document.getElementById('post-submit').addEventListener('click', ()=>{
 
 // 게시글 수정/삭제
 document.getElementById('post-list').addEventListener('click', (e)=>{
-  if(e.target.classList.contains('delete-post')) e.target.closest('div').remove();
+  if(e.target.classList.contains('delete-post')){
+    e.target.closest('div').remove();
+  }
   if(e.target.classList.contains('edit-post')){
     const box = e.target.closest('div');
     const title = prompt("제목 수정", box.querySelector('h4').innerText);
@@ -260,18 +275,41 @@ document.getElementById('add-product').addEventListener('click', ()=>{
 
 // 상품 삭제
 document.getElementById('product-list').addEventListener('click', (e)=>{
-  if(e.target.classList.contains('delete-product')) e.target.closest('div').remove();
+  if(e.target.classList.contains('delete-product')){
+    e.target.closest('div').remove();
+  }
 });
 
-// 검색 기능
+// 검색 기능 (상품/게시글 필터링)
 const searchInput = document.getElementById('search-input');
 const sections = document.getElementById('sections');
 
-searchInput.addEventListener('input', ()=>{
-  const term = searchInput.value.trim().toLowerCase();
+function reorderSections(){
+  sections.innerHTML = "";
   ['products','posts','schedule','inquiry','donation'].forEach(id=>{
-    const sec = document.getElementById(id);
-    sec.style.display = sec.innerText.toLowerCase().includes(term) ? 'block' : 'none';
+    sections.appendChild(document.getElementById(id));
+  });
+}
+
+searchInput.addEventListener('input', ()=>{
+  const query = searchInput.value.trim().toLowerCase();
+  if(!query){ // 검색어 없으면 모두 보이기
+    document.querySelectorAll('.search-item').forEach(el=> el.style.display="block");
+    return;
+  }
+
+  reorderSections();
+
+  // 상품 필터
+  document.querySelectorAll('#product-list .search-item').forEach(item=>{
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(query) ? "block" : "none";
+  });
+
+  // 게시글 필터
+  document.querySelectorAll('#post-list .search-item').forEach(item=>{
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(query) ? "block" : "none";
   });
 });
 </script>
