@@ -44,42 +44,42 @@
         <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">문의 작성하기</a>
         <a href="tel:01026946608" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
       </div>
-    <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
-     <p class="font-semibold block">녹차</p>
-     <p class="text-red-500 font-bold block mt-1">0원</p>
     </div>
-
+    <div class="bg-white rounded-lg shadow-inner p-4 text-center">
+      <p class="font-semibold block">녹차</p>
+      <p class="text-red-500 font-bold block mt-1">0원</p>
+    </div>
+  </div>
 </section>
 
 <div id="sections">
 
-  <!-- Products -->
-  <section id="products" class="bg-white py-10">
+  <!-- 문의 -->
+  <section id="inquiry" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-4">상품</h3>
-      <div id="product-list" class="scroll-container">
-        <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
-          <p class="font-semibold">녹차</p>
-          <p class="text-red-500 font-bold">0원</p>
-        </div>
+      <h3 class="text-2xl font-bold mb-4">문의</h3>
+      <p class="mb-3">궁금한 점이나 요청사항이 있으면 아래 링크를 통해 문의해 주세요.</p>
+      <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank"
+         class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">문의 작성하기</a>
+      <a href="tel:01026946608"
+         class="ml-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
+    </div>
+  </section>
+
+  <!-- 기부금 사용내역 -->
+  <section id="donation" class="bg-white py-10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
+      <div class="overflow-auto bg-gray-50 p-4 rounded">
+        <table class="min-w-full text-sm text-left">
+          <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
+          <tbody id="donation-body"></tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- Posts -->
-  <section id="posts" class="bg-white py-10">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-4">게시글</h3>
-      <div id="post-list" class="scroll-container">
-        <div class="border p-4 w-96 flex-shrink-0 search-item bg-gray-50 rounded relative">
-          <h4 class="font-semibold">예시 게시글</h4>
-          <p>이곳에 게시글 내용이 표시됩니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Schedule -->
+  <!-- 장터 일정 -->
   <section id="schedule" class="bg-white py-8">
     <div class="max-w-6xl mx-auto px-4">
       <h3 class="text-2xl font-bold mb-4">장터 일정</h3>
@@ -96,19 +96,37 @@
     </div>
   </section>
 
-  <!-- Donation -->
-  <section id="donation" class="bg-white py-10">
+  <!-- 상품 -->
+  <section id="products" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
-      <div class="overflow-auto bg-gray-50 p-4 rounded">
-        <table class="min-w-full text-sm text-left">
-          <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
-          <tbody id="donation-body"></tbody>
-        </table>
+      <h3 class="text-2xl font-bold mb-4">상품</h3>
+      <div id="product-list" class="scroll-container">
+        <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
+          <p class="font-semibold block">녹차</p>
+          <p class="text-red-500 font-bold block mt-1">0원</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- 게시글 -->
+  <section id="posts" class="bg-white py-10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-2xl font-bold mb-4">게시글</h3>
+      <div id="post-list" class="scroll-container">
+        <div class="border p-4 w-96 flex-shrink-0 search-item bg-gray-50 rounded relative">
+          <h4 class="font-semibold">예시 게시글</h4>
+          <p>이곳에 게시글 내용이 표시됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- 검색 결과 없음 메시지 -->
+<div id="no-results" class="hidden text-center text-gray-500 py-6">
+  검색 결과가 없습니다.
 </div>
 
 <!-- Footer -->
@@ -154,29 +172,59 @@ const searchInput = document.getElementById('search-input');
 const sections = document.getElementById('sections');
 const productList = document.getElementById('product-list');
 const postList = document.getElementById('post-list');
+const noResults = document.getElementById('no-results');
 
 searchInput.addEventListener('input', ()=>{
   const query = searchInput.value.trim().toLowerCase();
+  const productItems = Array.from(productList.children);
+  const postItems = Array.from(postList.children);
+
   if(query === "") {
-    // 검색 해제 시 원래 순서
+    // 검색 해제 시 기본 순서: 문의 → 기부금 → 장터 일정 → 상품 → 게시글
+    sections.style.display = "block";
+    noResults.classList.add("hidden");
+
+    sections.appendChild(document.getElementById('inquiry'));
+    sections.appendChild(document.getElementById('donation'));
+    sections.appendChild(document.getElementById('schedule'));
     sections.appendChild(document.getElementById('products'));
     sections.appendChild(document.getElementById('posts'));
-    sections.appendChild(document.getElementById('schedule'));
-    sections.appendChild(document.getElementById('donation'));
+
+    productItems.forEach(div=> div.style.display = 'block');
+    postItems.forEach(div=> div.style.display = 'block');
+
   } else {
-    // 검색 시 우선순위: 상품, 게시글
+    // 검색 상태 순서: 상품 → 게시글 → 문의 → 장터 일정 → 기부금
     sections.appendChild(document.getElementById('products'));
     sections.appendChild(document.getElementById('posts'));
+    sections.appendChild(document.getElementById('inquiry'));
     sections.appendChild(document.getElementById('schedule'));
     sections.appendChild(document.getElementById('donation'));
-    // 상품 필터링
-    Array.from(productList.children).forEach(div=>{
-      div.style.display = div.textContent.toLowerCase().includes(query)?'flex':'none';
+
+    let productVisible = false;
+    let postVisible = false;
+
+    productItems.forEach(div=>{
+      if(div.textContent.toLowerCase().includes(query)) {
+        div.style.display = 'block';
+        productVisible = true;
+      } else {
+        div.style.display = 'none';
+      }
     });
-    // 게시글 필터링
-    Array.from(postList.children).forEach(div=>{
-      div.style.display = div.textContent.toLowerCase().includes(query)?'flex':'none';
+
+    postItems.forEach(div=>{
+      if(div.textContent.toLowerCase().includes(query)) {
+        div.style.display = 'block';
+        postVisible = true;
+      } else {
+        div.style.display = 'none';
+      }
     });
+
+    const hasResults = productVisible || postVisible;
+    sections.style.display = hasResults ? "block" : "none";
+    noResults.classList.toggle("hidden", hasResults);
   }
 });
 </script>
