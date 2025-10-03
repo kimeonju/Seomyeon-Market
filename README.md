@@ -6,7 +6,7 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style>
 .hero-bg {background: linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
-.search-item {min-width: 300px;}
+.search-item {min-width: 300px; display: flex; flex-direction: column; justify-content: center;}
 .scroll-container {display:flex; overflow-x:auto; gap:1rem;}
 </style>
 </head>
@@ -67,6 +67,19 @@
     </div>
   </section>
 
+  <!-- 게시글 -->
+  <section id="posts" class="bg-white py-10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-2xl font-bold mb-4">게시글</h3>
+      <div id="post-list" class="scroll-container">
+        <div class="border p-4 w-96 flex-shrink-0 search-item bg-gray-50 rounded relative">
+          <h4 class="font-semibold">환영 인사</h4>
+          <p>서면나눔5일장 홈페이지에 오신 것을 환영합니다! 🍵</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 문의 -->
   <section id="inquiry" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
@@ -76,19 +89,6 @@
          class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">문의 작성하기</a>
       <a href="tel:01026946608"
          class="ml-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
-    </div>
-  </section>
-
-  <!-- 기부금 사용내역 -->
-  <section id="donation" class="bg-white py-10">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
-      <div class="overflow-auto bg-gray-50 p-4 rounded">
-        <table class="min-w-full text-sm text-left">
-          <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
-          <tbody id="donation-body"></tbody>
-        </table>
-      </div>
     </div>
   </section>
 
@@ -109,24 +109,23 @@
     </div>
   </section>
 
-  <!-- 게시글 -->
-  <section id="posts" class="bg-white py-10">
+  <!-- 기부금 사용내역 -->
+  <section id="donation" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-4">게시글</h3>
-      <div id="post-list" class="scroll-container">
-        <!-- 비워둠 -->
+      <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
+      <div class="overflow-auto bg-gray-50 p-4 rounded">
+        <table class="min-w-full text-sm text-left">
+          <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
+          <tbody id="donation-body"></tbody>
+        </table>
       </div>
     </div>
   </section>
 
 </div>
 
-<!-- 검색 결과 없음 메시지 -->
-<div id="no-results" class="hidden text-center text-gray-500 py-6">
-  검색 결과가 없습니다.
-</div>
+<div id="no-results" class="hidden text-center text-gray-500 py-6">검색 결과가 없습니다.</div>
 
-<!-- Footer -->
 <footer class="bg-gray-800 text-gray-200 py-6 mt-8">
   <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col md:flex-row justify-between">
     <div>
@@ -140,7 +139,6 @@
 </footer>
 
 <script>
-// 기부금 불러오기
 async function loadDonations() {
   const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
   const sheetName = "Sheet1";
@@ -153,10 +151,10 @@ async function loadDonations() {
     data.forEach(row => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td class="p-2 border-t">${row.날짜 || ""}</td>
-        <td class="p-2 border-t">${row.항목 || ""}</td>
-        <td class="p-2 border-t">${row.금액 || ""}</td>
-        <td class="p-2 border-t">${row.비고 || ""}</td>
+        <td class="p-2 border-t">${row.날짜||""}</td>
+        <td class="p-2 border-t">${row.항목||""}</td>
+        <td class="p-2 border-t">${row.금액||""}</td>
+        <td class="p-2 border-t">${row.비고||""}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -164,7 +162,6 @@ async function loadDonations() {
 }
 loadDonations();
 
-// 검색 기능
 const searchInput = document.getElementById('search-input');
 const sections = document.getElementById('sections');
 const productList = document.getElementById('product-list');
@@ -176,49 +173,32 @@ searchInput.addEventListener('input', ()=>{
   const productItems = Array.from(productList.children);
   const postItems = Array.from(postList.children);
 
-  if(query === "") {
-    // 검색 안 할 때: 상품 → 문의 → 기부금 → 장터 일정 → 게시글
-    sections.style.display = "block";
-    noResults.classList.add("hidden");
+  // 항상 순서 고정
+  sections.appendChild(document.getElementById('products'));
+  sections.appendChild(document.getElementById('posts'));
+  sections.appendChild(document.getElementById('inquiry'));
+  sections.appendChild(document.getElementById('schedule'));
+  sections.appendChild(document.getElementById('donation'));
 
-    sections.appendChild(document.getElementById('products'));
-    sections.appendChild(document.getElementById('inquiry'));
-    sections.appendChild(document.getElementById('donation'));
-    sections.appendChild(document.getElementById('schedule'));
-    sections.appendChild(document.getElementById('posts'));
+  let productVisible = false;
+  let postVisible = false;
 
-    productItems.forEach(div=> div.style.display = 'block');
-    postItems.forEach(div=> div.style.display = 'block');
+  productItems.forEach(div=>{
+    if(query === "" || div.textContent.toLowerCase().includes(query)) {
+      div.style.display = 'block';
+      productVisible = true;
+    } else div.style.display = 'none';
+  });
 
-  } else {
-    // 검색 상태: 상품 → 게시글 → 문의 → 장터 일정 → 기부금
-    sections.appendChild(document.getElementById('products'));
-    sections.appendChild(document.getElementById('posts'));
-    sections.appendChild(document.getElementById('inquiry'));
-    sections.appendChild(document.getElementById('schedule'));
-    sections.appendChild(document.getElementById('donation'));
+  postItems.forEach(div=>{
+    if(query === "" || div.textContent.toLowerCase().includes(query)) {
+      div.style.display = 'block';
+      postVisible = true;
+    } else div.style.display = 'none';
+  });
 
-    let productVisible = false;
-    let postVisible = false;
-
-    productItems.forEach(div=>{
-      if(div.textContent.toLowerCase().includes(query)) {
-        div.style.display = 'block';
-        productVisible = true;
-      } else div.style.display = 'none';
-    });
-
-    postItems.forEach(div=>{
-      if(div.textContent.toLowerCase().includes(query)) {
-        div.style.display = 'block';
-        postVisible = true;
-      } else div.style.display = 'none';
-    });
-
-    const hasResults = productVisible || postVisible;
-    sections.style.display = hasResults ? "block" : "none";
-    noResults.classList.toggle("hidden", hasResults);
-  }
+  if(query!=="" && !productVisible && !postVisible) noResults.classList.remove('hidden');
+  else noResults.classList.add('hidden');
 });
 </script>
 
