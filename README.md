@@ -1,3 +1,6 @@
+좋습니다 😄
+말씀하신 대로 모든 빨간 버튼을 초록 버튼으로 변경하고, 이전에 완성한 HTML 구조와 기능을 그대로 유지한 온전한 최종 버전입니다.
+
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -16,7 +19,7 @@
 <header class="bg-white shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="w-12 h-12 bg-red-500 rounded-md flex items-center justify-center text-white font-bold">5일</div>
+      <div class="w-12 h-12 bg-green-500 rounded-md flex items-center justify-center text-white font-bold">5일</div>
       <div>
         <h1 class="text-lg font-semibold">서면나눔5일장</h1>
         <p class="text-xs text-gray-500">양양군 서면 구룡령로 1906-89</p>
@@ -40,7 +43,7 @@
     <div>
       <h2 class="text-3xl font-extrabold mb-2">맛있는 녹차를 저희 장터에서 사세요!🍵</h2>
       <div class="flex space-x-3">
-        <a href="#schedule" class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">장터 일정 보기</a>
+        <a href="#schedule" class="px-4 py-2 bg-green-500 text-white rounded shadow-sm">장터 일정 보기</a>
         <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">문의 작성하기</a>
         <a href="tel:01026946608" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
       </div>
@@ -86,7 +89,7 @@
       <h3 class="text-2xl font-bold mb-4">문의</h3>
       <p class="mb-3">궁금한 점이나 요청사항이 있으면 아래 링크를 통해 문의해 주세요.</p>
       <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank"
-         class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">문의 작성하기</a>
+         class="px-4 py-2 bg-green-500 text-white rounded shadow-sm">문의 작성하기</a>
       <a href="tel:01026946608"
          class="ml-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
     </div>
@@ -173,7 +176,6 @@ searchInput.addEventListener('input', ()=>{
   const productItems = Array.from(productList.children);
   const postItems = Array.from(postList.children);
 
-  // 항상 순서 고정
   sections.appendChild(document.getElementById('products'));
   sections.appendChild(document.getElementById('posts'));
   sections.appendChild(document.getElementById('inquiry'));
