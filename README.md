@@ -45,9 +45,9 @@
         <a href="tel:01026946608" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
       </div>
     </div>
-    <div class="bg-white rounded-lg shadow-inner p-4 text-center">
-      <p class="font-semibold block">녹차</p>
-      <p class="text-red-500 font-bold block mt-1">0원</p>
+      <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
+        <p class="font-semibold">녹차</p>
+        <p class="text-red-500 font-bold mt-1">0원</p>
     </div>
   </div>
 </section>
