@@ -1,128 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>서면나눔5일장</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-<style>
-.hero-bg {background: linear-gradient(180deg, rgba(255,99,71,0.08), rgba(255,160,122,0.02));}
-.search-item {min-width: 300px;}
-.hidden-section {display:none;}
-</style>
+  <meta charset="UTF-8">
+  <title>서면나눔5일장</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
 
-<!-- Header -->
 <header class="bg-white shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-    <div class="flex items-center space-x-3">
-      <div class="w-12 h-12 bg-red-500 rounded-md flex items-center justify-center text-white font-bold">5일</div>
-      <div>
-        <h1 class="text-lg font-semibold">서면나눔5일장</h1>
-        <p class="text-xs text-gray-500">양양군 서면 구룡령로 1906-89</p>
-      </div>
-    </div>
+    <h1 class="text-xl font-bold">서면나눔5일장</h1>
     <div class="flex items-center space-x-2">
-      <nav class="space-x-4 text-sm">
-        <a href="#schedule" class="hover:underline">장터 일정</a>
-        <a href="#donation" class="hover:underline">기부금 사용내역</a>
-        <a href="#posts" class="hover:underline">게시글</a>
-        <a href="#products" class="hover:underline">상품</a>
-        <button id="login-btn" class="px-2 py-1 bg-blue-600 text-white rounded">관리자 로그인</button>
-        <button id="logout-btn" class="px-2 py-1 bg-gray-400 text-white rounded hidden">로그아웃</button>
-      </nav>
+      <input id="search-input" type="text" placeholder="검색..." class="border p-2 rounded w-64">
+      <button id="login-btn" class="px-2 py-1 bg-blue-600 text-white rounded">관리자 로그인</button>
     </div>
   </div>
 </header>
 
-<!-- Hero -->
-<section class="hero-bg py-12">
-  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
-    <div>
-      <h2 class="text-3xl font-extrabold mb-2">맛있는 고추를 저희 장터에서 사세요!🌶</h2>
-      <div class="flex space-x-3">
-        <a href="#schedule" class="px-4 py-2 bg-red-500 text-white rounded shadow-sm">장터 일정 보기</a>
-        <a href="https://forms.gle/h7DNUtKJ9b5EeR3CA" target="_blank" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">문의 작성하기</a>
-        <a href="tel:01026946608" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">전화 문의</a>
-      </div>
-    </div>
-    <div class="bg-white rounded-lg shadow-inner p-4 text-center">
-      <img src="홍고추.jpg" alt="홍고추 상품 이미지" class="mx-auto w-48 h-auto mb-2 rounded">
-      <p class="font-semibold">홍고추</p>
-      <p class="text-red-500 font-bold">0원</p>
-      <p class="text-sm text-gray-600">무료배송 (CJ ONE)</p>
-    </div>
-  </div>
-</section>
-
-<!-- Sections -->
-<div id="sections" class="max-w-6xl mx-auto px-4">
-
-  <!-- Products -->
-  <section id="products" class="bg-white py-10">
-    <h3 class="text-2xl font-bold mb-4">상품</h3>
+<main class="max-w-6xl mx-auto p-4">
+  <!-- 상품 -->
+  <section id="products" class="py-10">
+    <h2 class="text-2xl font-bold mb-4">상품</h2>
     <div id="product-form" class="hidden mb-6">
       <input id="product-name" type="text" placeholder="상품명" class="border p-2 w-full mb-2 rounded">
       <input id="product-price" type="text" placeholder="가격" class="border p-2 w-full mb-2 rounded">
-      <input id="product-img" type="text" placeholder="이미지 URL" class="border p-2 w-full mb-2 rounded">
       <button id="add-product" class="px-4 py-2 bg-green-600 text-white rounded">상품 추가</button>
     </div>
     <div id="product-list" class="flex overflow-x-auto space-x-4"></div>
   </section>
 
-  <!-- Posts -->
-  <section id="posts" class="bg-white py-10">
-    <h3 class="text-2xl font-bold mb-4">게시글</h3>
+  <!-- 게시글 -->
+  <section id="posts" class="py-10">
+    <h2 class="text-2xl font-bold mb-4">게시글</h2>
     <div id="write-section" class="hidden mb-6">
       <input id="post-title" type="text" placeholder="제목" class="border p-2 w-full mb-2 rounded">
       <textarea id="post-content" placeholder="내용" class="border p-2 w-full mb-2 rounded"></textarea>
-      <input id="post-media" type="text" placeholder="미디어 URL" class="border p-2 w-full mb-2 rounded">
       <button id="post-submit" class="px-4 py-2 bg-green-600 text-white rounded">게시</button>
     </div>
     <div id="post-list" class="flex overflow-x-auto space-x-4"></div>
   </section>
-
-  <!-- Schedule -->
-  <section id="schedule" class="bg-white py-8">
-    <h3 class="text-2xl font-bold mb-4">장터 일정</h3>
-    <div class="overflow-auto bg-gray-50 p-4 rounded">
-      <table class="min-w-full text-sm text-left">
-        <thead><tr><th class="p-2">날짜</th><th class="p-2">판매 품목</th></tr></thead>
-        <tbody>
-          <tr class="border-t"><td class="p-2">매달 4일, 9일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
-          <tr class="border-t"><td class="p-2">매달 14일, 19일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
-          <tr class="border-t"><td class="p-2">매달 24일, 29일</td><td class="p-2">생고추, 건고추, 풋고추</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Donation -->
-  <section id="donation" class="bg-white py-10">
-    <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
-    <div class="overflow-auto bg-gray-50 p-4 rounded">
-      <table class="min-w-full text-sm text-left">
-        <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
-        <tbody id="donation-body"></tbody>
-      </table>
-    </div>
-  </section>
-
-</div>
-
-<!-- Footer -->
-<footer class="bg-gray-800 text-gray-200 py-6 mt-8">
-  <div class="flex flex-col md:flex-row justify-between max-w-6xl mx-auto px-4 text-sm">
-    <div>
-      <p class="font-semibold">서면나눔5일장</p>
-      <p class="text-xs">주소: 양양군 서면 구룡령로 1906-89</p>
-    </div>
-    <div class="text-xs text-gray-400">
-      <p>© 2025 서면나눔5일장. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+</main>
 
 <!-- 로그인 모달 -->
 <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
@@ -138,95 +56,118 @@
 </div>
 
 <script>
-// 관리자 로그인
-const loginBtn = document.getElementById('login-btn');
-const logoutBtn = document.getElementById('logout-btn');
-const modal = document.getElementById('login-modal');
-const writeSection = document.getElementById('write-section');
-const productForm = document.getElementById('product-form');
+// ================== GitHub 연동 설정 ==================
+const GITHUB_USER = "사용자명";     
+const GITHUB_REPO = "레포명";      
+const DATA_PATH   = "data.json";   
+const BRANCH      = "main";        
+const TOKEN       = "ghp_토큰";     
 
-loginBtn.addEventListener('click', ()=> modal.classList.remove('hidden'));
-document.getElementById('login-cancel').addEventListener('click', ()=> modal.classList.add('hidden'));
-document.getElementById('login-confirm').addEventListener('click', ()=>{
-  const id = document.getElementById('admin-id').value;
-  const pw = document.getElementById('admin-pw').value;
-  if(id==='eonju23' && pw==='200301'){
-    alert("관리자 로그인 성공");
-    writeSection.classList.remove('hidden');
-    productForm.classList.remove('hidden');
-    modal.classList.add('hidden');
-    loginBtn.classList.add('hidden');
-    logoutBtn.classList.remove('hidden');
-  } else alert("로그인 실패");
-});
+let posts = [];
+let products = [];
 
-// 로그아웃
-logoutBtn.addEventListener('click', ()=>{
-  writeSection.classList.add('hidden');
-  productForm.classList.add('hidden');
-  loginBtn.classList.remove('hidden');
-  logoutBtn.classList.add('hidden');
-});
+// 데이터 불러오기
+async function loadData() {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${DATA_PATH}?t=${Date.now()}`);
+    const data = await res.json();
+    posts = data.posts || [];
+    products = data.products || [];
+    renderPosts();
+    renderProducts();
+  } catch (err) {
+    console.error("데이터 로드 실패:", err);
+  }
+}
 
-// 게시글/상품 렌더 (누구나 볼 수 있음)
-const posts = [];
-const products = [];
+// 데이터 저장하기
+async function saveData() {
+  const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_PATH}`;
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify({posts, products}, null, 2))));
+  const getRes = await fetch(url, { headers: { Authorization: `token ${TOKEN}` } });
+  const getData = await getRes.json();
+  const sha = getData.sha;
 
-function renderPosts(){
-  const postList = document.getElementById('post-list');
-  postList.innerHTML = "";
-  posts.forEach(post=>{
-    const div = document.createElement('div');
-    div.className = 'border p-4 w-96 flex-shrink-0 bg-gray-50 rounded relative';
-    div.innerHTML = `<h4 class="font-semibold">${post.title}</h4>
-                     <p>${post.content}</p>
-                     ${post.media ? `<img src="${post.media}" class="mt-2 rounded">` : ""}`;
-    postList.appendChild(div);
+  await fetch(url, {
+    method: "PUT",
+    headers: { "Authorization": `token ${TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: "자동 업데이트",
+      content: content,
+      sha: sha,
+      branch: BRANCH
+    })
   });
 }
 
-function renderProducts(){
-  const productList = document.getElementById('product-list');
-  productList.innerHTML = "";
-  products.forEach(p=>{
-    const div = document.createElement('div');
-    div.className = 'border p-4 w-60 flex-shrink-0 text-center bg-gray-50 rounded';
-    div.innerHTML = `<img src="${p.image}" class="mx-auto w-32 h-auto mb-2 rounded">
-                     <p class="font-semibold">${p.name}</p>
-                     <p class="text-red-500 font-bold">${p.price}</p>`;
-    productList.appendChild(div);
+// 렌더링
+function renderPosts(filter="") {
+  const list = document.getElementById("post-list");
+  list.innerHTML = "";
+  posts.filter(p => p.title.includes(filter) || p.content.includes(filter))
+       .forEach(p => {
+    const div = document.createElement("div");
+    div.className = "border p-4 w-96 flex-shrink-0 bg-gray-50 rounded";
+    div.innerHTML = `<h4 class="font-semibold">${p.title}</h4><p>${p.content}</p>`;
+    list.appendChild(div);
+  });
+}
+
+function renderProducts(filter="") {
+  const list = document.getElementById("product-list");
+  list.innerHTML = "";
+  products.filter(p => p.name.includes(filter))
+          .forEach(p => {
+    const div = document.createElement("div");
+    div.className = "border p-4 w-60 flex-shrink-0 bg-gray-50 rounded text-center";
+    div.innerHTML = `<p class="font-semibold">${p.name}</p><p class="text-red-500 font-bold">${p.price}원</p>`;
+    list.appendChild(div);
   });
 }
 
 // 게시글 추가
-document.getElementById('post-submit').addEventListener('click', ()=>{
-  const title = document.getElementById('post-title').value.trim();
-  const content = document.getElementById('post-content').value.trim();
-  const media = document.getElementById('post-media').value.trim();
-  if(!title||!content){ alert("제목과 내용을 입력하세요"); return; }
-  posts.push({title, content, media});
+document.getElementById("post-submit").addEventListener("click", async ()=>{
+  const title = document.getElementById("post-title").value.trim();
+  const content = document.getElementById("post-content").value.trim();
+  if (!title || !content) return alert("제목과 내용을 입력하세요.");
+  posts.push({title, content});
   renderPosts();
-  document.getElementById('post-title').value="";
-  document.getElementById('post-content').value="";
-  document.getElementById('post-media').value="";
+  await saveData();
 });
 
 // 상품 추가
-document.getElementById('add-product').addEventListener('click', ()=>{
-  const name = document.getElementById('product-name').value.trim();
-  const price = document.getElementById('product-price').value.trim();
-  const image = document.getElementById('product-img').value.trim();
-  if(!name||!price||!image){ alert("모든 항목을 입력하세요"); return; }
-  products.push({name, price, image});
+document.getElementById("add-product").addEventListener("click", async ()=>{
+  const name = document.getElementById("product-name").value.trim();
+  const price = document.getElementById("product-price").value.trim();
+  if (!name || !price) return alert("상품명과 가격을 입력하세요.");
+  products.push({name, price});
   renderProducts();
-  document.getElementById('product-name').value="";
-  document.getElementById('product-price').value="";
-  document.getElementById('product-img').value="";
+  await saveData();
 });
 
-// 초기 렌더
-renderPosts();
-renderProducts();
+// 관리자 로그인
+document.getElementById("login-btn").addEventListener("click", ()=> modal.classList.remove("hidden"));
+document.getElementById("login-cancel").addEventListener("click", ()=> modal.classList.add("hidden"));
+document.getElementById("login-confirm").addEventListener("click", ()=>{
+  const id = document.getElementById("admin-id").value;
+  const pw = document.getElementById("admin-pw").value;
+  if(id==="eonju23" && pw==="200301"){
+    writeSection.classList.remove("hidden");
+    productForm.classList.remove("hidden");
+    modal.classList.add("hidden");
+  } else {
+    alert("로그인 실패");
+  }
+});
+
+// 검색 기능
+document.getElementById("search-input").addEventListener("input", e=>{
+  const filter = e.target.value;
+  renderPosts(filter);
+  renderProducts(filter);
+});
+
+loadData();
 </script>
 </body>
 </html>
