@@ -63,6 +63,10 @@
           <p class="font-semibold">녹차</p>
           <p class="text-red-500 font-bold mt-1">0원</p>
         </div>
+        <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
+          <p class="font-semibold">표고버섯(1kg)</p>
+          <p class="text-red-500 font-bold mt-1">3,000원</p>
+        </div>
       </div>
     </div>
   </section>
@@ -109,14 +113,34 @@
     </div>
   </section>
 
-  <!-- 기부금 사용내역 -->
+  <!-- ✅ 기부금 사용내역 (수동입력) -->
   <section id="donation" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
       <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
       <div class="overflow-auto bg-gray-50 p-4 rounded">
         <table class="min-w-full text-sm text-left">
-          <thead><tr><th class="p-2">날짜</th><th class="p-2">항목</th><th class="p-2">금액</th><th class="p-2">비고</th></tr></thead>
-          <tbody id="donation-body"></tbody>
+          <thead>
+            <tr>
+              <th class="p-2">날짜</th>
+              <th class="p-2">항목</th>
+              <th class="p-2">금액</th>
+              <th class="p-2">비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t">
+              <td class="p-2">2025-01-05</td>
+              <td class="p-2">노인회 후원</td>
+              <td class="p-2">100,000원</td>
+              <td class="p-2">현금 전달</td>
+            </tr>
+            <tr class="border-t">
+              <td class="p-2">2025-03-10</td>
+              <td class="p-2">지역아동센터 지원</td>
+              <td class="p-2">80,000원</td>
+              <td class="p-2">식자재 구입</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -139,29 +163,6 @@
 </footer>
 
 <script>
-async function loadDonations() {
-  const sheetId = "1BonKPabCsJpnpmatmyoabENRZjgxpOmN7q73cgQdFD8";
-  const sheetName = "Sheet1";
-  const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    const tbody = document.getElementById("donation-body");
-    tbody.innerHTML = "";
-    data.forEach(row => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="p-2 border-t">${row.날짜||""}</td>
-        <td class="p-2 border-t">${row.항목||""}</td>
-        <td class="p-2 border-t">${row.금액||""}</td>
-        <td class="p-2 border-t">${row.비고||""}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch(err) { console.error("기부금 로드 실패:", err); }
-}
-loadDonations();
-
 const searchInput = document.getElementById('search-input');
 const sections = document.getElementById('sections');
 const productList = document.getElementById('product-list');
