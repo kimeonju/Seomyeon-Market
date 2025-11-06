@@ -113,7 +113,7 @@
     </div>
   </section>
 
-  <!-- ✅ 기부금 사용내역 (수동입력) -->
+  <!-- 기부금 사용내역 -->
   <section id="donation" class="bg-white py-10">
     <div class="max-w-6xl mx-auto px-4">
       <h3 class="text-2xl font-bold mb-4">기부금 사용내역</h3>
