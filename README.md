@@ -128,18 +128,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="border-t">
-              <td class="p-2">2025-01-05</td>
-              <td class="p-2">노인회 후원</td>
-              <td class="p-2">100,000원</td>
-              <td class="p-2">현금 전달</td>
-            </tr>
-            <tr class="border-t">
-              <td class="p-2">2025-03-10</td>
-              <td class="p-2">지역아동센터 지원</td>
-              <td class="p-2">80,000원</td>
-              <td class="p-2">식자재 구입</td>
-            </tr>
           </tbody>
         </table>
       </div>
