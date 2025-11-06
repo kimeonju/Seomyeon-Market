@@ -60,11 +60,11 @@
       <h3 class="text-2xl font-bold mb-4">상품</h3>
       <div id="product-list" class="scroll-container">
         <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
-          <p class="font-semibold">녹차</p>
+          <p class="font-semibold">녹차(1kg) </p>
           <p class="text-red-500 font-bold mt-1">0원</p>
         </div>
         <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded relative">
-          <p class="font-semibold">표고버섯(1kg)</p>
+          <p class="font-semibold">표고버섯(1kg) </p>
           <p class="text-red-500 font-bold mt-1">3,000원</p>
         </div>
       </div>
