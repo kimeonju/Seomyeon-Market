@@ -72,6 +72,10 @@
         <p class="font-semibold">표고버섯(1kg)</p>
         <p class="text-red-500 font-bold mt-1">3,000원</p>
       </div>
+      <div class="border p-4 w-60 flex-shrink-0 search-item text-center bg-gray-50 rounded">
+        <p class="font-semibold">더덕(1kg)</p>
+        <p class="text-red-500 font-bold mt-1">5,000원</p>
+      </div>
     </div>
   </div>
 </section>
